@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700");
+
+:root {
+  --royal-blue: #3e53da;
+  --red: #fe5c61;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Poppins';
+  background: radial-gradient(circle at 10% 20%, rgba(3, 122, 222, 0.5) 0%, rgba(3, 229, 183, 0.5) 90%);
+}
+
+#canvas-gradient {
+  z-index: -999;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+
+/*
+--- MAIN PAGE style ---
+*/
+
+h1 {
+  font-family: 'Poppins';
+  font-size: 40px;
+  color: white;
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+  font-family: 'Poppins';
+  font-size: 22px;
+  font-weight: 400;
+  color: white;
+}
+
+h3 {
+  font-family: 'Poppins';
+  font-size: 40px;
+  color: white;
+}
+
+
+/*Main container*/
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.main-box {
+  width: 80vh;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  text-align: center;
+}
+
+.main-box img {
+  width: 15rem;
+}
+
+.main-box button {
+  padding: 5px;
+  width: 9rem;
+  height: 3rem;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+  background: var(--royal-blue);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .3s;
+  opacity: 1;
+}
+
+.main-box button:hover {
+  opacity: 0.8;
+}
+
+.main-box button:focus {
+  transform: scale(0.9);
+}
+
+.main-box .text-box{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+form {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+
+}
+
+input {
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 2px solid #ddd;
+  /* Border color input */
+  border-radius: 8px;
+  /* Border radius input */
+  transition: border-color 0.3s ease-in-out;
+  outline: none;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+input:focus {
+  border-color: var(--royal-blue);
+  /* Warna input saat focus */
+}
+
+input[type=submit] {
+  background-color: var(--royal-blue);
+  /* Warna button */
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+input[type=submit]:hover {
+  opacity: 0.8;
+}
+
+input[type=submit]:focus {
+  transform: scale(0.9);
+}
+
+.error {
+  color: white;
+  background-color: var(--red);
+  border-radius: 8px;
+  border: 1px solid var(--red);
+  padding: 1rem;
+}

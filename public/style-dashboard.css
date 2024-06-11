@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700");
+
+:root {
+  --royal-blue: #3e53da;
+  --red: #fe5c61;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 10% 20%, rgba(3, 122, 222, 0.5) 0%, rgba(3, 229, 183, 0.5) 90%);
+}
+
+/*NAVBAR style*/
+nav {
+  padding: .5rem;
+  background-color: var(--royal-blue);
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  color: white;
+}
+
+nav button{
+  padding: 5px;
+  float: right;
+  border: 0;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+nav button:hover{
+  opacity: 0.9;
+}
+
+nav button:focus{
+  transform: scale(0.9);
+}
+
+/*GRID Container*/
+.container {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 18px;
+  grid-row-gap: 18px;
+}
+
+.logs_table {
+  grid-area: 1 / 1 / 2 / 3;
+}
+
+.users_table {
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.user_add {
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+/* Tables */
+.table_component {
+  max-height: 45vh;
+  overflow: auto;
+  width: auto;
+}
+
+.table_component table {
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  border-spacing: 1px;
+  text-align: left;
+}
+
+th:first-of-type {
+  border-top-left-radius: 10px;
+}
+
+th:last-of-type {
+  border-top-right-radius: 10px;
+}
+
+tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 10px;
+  border: none;
+}
+
+tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 10px;
+  border: none;
+}
+
+/* Rows and columns*/
+.table_component th {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: rgba(255, 255, 255, 0.4);
+  color: #1d1d1d;
+  padding: 10px;
+}
+
+.table_component table tbody tr td {
+  color: #000000;
+  font-size: 17px;
+  padding: 10px;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #deeeee;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #bad0dc;
+}
+
+/*Add user box*/
+.user-box {
+  font-family: 'Poppins', sans-serif;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: .5rem;
+  text-align: center;
+  width: auto;
+}
+
+.user-box p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.user-box input {
+  width: 50%;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease-in-out;
+  outline: none;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+.user-box input:focus {
+  border-color: var(--royal-blue);
+}
+
+.user-box input[type=submit] {
+  width: 50%;
+  background-color: var(--royal-blue);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.user-box input[type=submit]:hover {
+  opacity: 0.8;
+}
+
+.user-box input[type=submit]:focus {
+  transform: scale(0.9);
+}
+
+/*Chart*/
+.js_charts {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  border-radius: 10px;
+}

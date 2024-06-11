@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Locksys - Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="style-dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+<body>
+
+  <nav> 
+    Dashboard 
+    <button onclick='window.location="/"'>Home</button>
+  </nav>
+
+  <div class="container">
+    <div class="logs_table">
+
+      <div class="table_component" role="region" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>Card UUID</th>
+              <th>Door ID</th>
+              <th>Customer Name</th>
+              <th>Time</th>
+              <th>Alarm Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% res_logs.forEach(function (res) { %>
+              <tr>
+                <td> <%= res.cardUUID %> </td>
+                <td> <%= res.doorID %> </td>
+                <td> <%= res.name %> </td>
+                <td> <%= res.opening_time %> </td>
+                <td> <%= res.alarm ? `On` : 'Off' %> </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+
+    <div class="users_table"> 
+      <div class="table_component" role="region" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Door ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% res_users.forEach(function (res) { %>
+              <tr>
+                <td> <%= res.name %> </td>
+                <td> <%= res.doorID %> </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="user_add"> 
+      <div class="user-box">
+        <p>Add new user</p>
+        <form>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="number" name="doorID" placeholder="Door ID" required>
+            <input type="text" name="cardUUID" placeholder="Card UUID" required>
+            <input type="hidden" name="api_key" value="<%= process.env.API_KEY %>" required>
+            <input type="submit" value="Add user" required>
+        </form>
+      </div>
+    </div>
+
+    <div class="js_charts">
+      <canvas id="door_chart"></canvas>
+    </div>
+
+    <div class="js_charts">
+      <canvas id="time_chart"></canvas>
+    </div>
+
+  </div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+    const chardoor_ctx = document.getElementById('door_chart');
+    const chartime_ctx = document.getElementById('time_chart');
+    let submitButton = document.querySelectorAll("input")[4];
+    
+    // --- Create charts ---
+    //Users door opening
+    new Chart(chardoor_ctx, {
+      type: 'bar',
+      data: {
+        labels: <%- JSON.stringify(res_users.map((r) => {return r.name})) %>,
+        datasets: [{
+          label: '# door opening',
+          data: <%- JSON.stringify(res_users.map((r) => {return r.count})) %>,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Door opening count per user'
+            }
+        }
+      }
+    });
+
+    //Users door opening time
+    new Chart(chartime_ctx, {
+      type: 'line',
+      data: {
+        labels: ['10:30', '11:00', '11:30', '12:00', '12:30', '13:00'],
+        datasets: [{
+          label: '# door opening',
+          data: [1, 4, 3, 5, 1, 0],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Door opening count per time'
+            }
+        }
+      }
+    });
+
+
+    //--- Add new user form submission ---
+    submitButton.addEventListener("click", function(event){
+      event.preventDefault();
+      let user = document.querySelectorAll("input")[0].value;
+      let _doorID = parseInt(document.querySelectorAll("input")[1].value);
+      let _cardUUID = document.querySelectorAll("input")[2].value;
+      let _api_key = document.querySelectorAll("input")[3].value;
+
+      if (isNaN(_doorID) || _doorID <= 0) {
+        return alert("DoorID must be greatern than 0!");
+      } else {
+        let json_body = {
+          name: user,
+          doorID: _doorID,
+          cardUUID: _cardUUID,
+          api_key: _api_key
+        };
+
+        fetch("/api/new_user", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(json_body)
+          }).then((res) => res.json())
+          .then((data) => location.reload())
+          .catch((err) => console.log(err))
+        }
+      }
+    )});
+  </script>
+
+</body>
+</html>

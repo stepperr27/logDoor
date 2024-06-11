@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style-home.css" />
+  <script type="text/javascript" src="granim.min.js"></script>
+</head>
+
+<body>
+  
+  <div class="container">
+    <div class="main-box">
+        <h3>Admin panel</h3>
+        <% if (error) { %>
+            <p class="error">Log in failed!</p>
+        <% } %>
+        
+        <form action="/admin" method="post">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Log in">
+        </form>
+    </div>
+  </div>
+
+  <canvas id="canvas-gradient"></canvas>
+
+  <script>
+    var granimInstance = new Granim({
+    element: '#canvas-gradient',
+    direction: 'diagonal',
+    isPausedWhenNotInView: true,
+    states : {
+        "default-state": {
+            gradients: [
+                ['#037ADE', '#03E5B7'],
+                ['#03E5B7', '#037ADE'],
+                ]
+            }
+        }
+    });
+  </script>
+
+</body>
+</html>
